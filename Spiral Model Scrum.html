@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		canvas{
+			float: left;
+		}
+		.editor{
+			margin: auto;
+			font-family: Arial;
+			font-size: 1em;
+			float: left;
+		}
+		.linkbotao {    font-family: verdana, arial, sans-serif; 
+		   font-size: 10pt; 
+		   font-weight: bold; 
+		   padding: 4px; 
+		   background-color: #ffffcc; 
+		   color: #666666; 
+		   text-decoration: none; 
+		} 
+		.linkbotao:link, 
+		.linkbotao:visited { 
+		   border-top: 1px solid #cccccc; 
+		   border-bottom: 2px solid #666666; 
+		   border-left: 1px solid #cccccc; 
+		   border-right: 2px solid #666666; 
+		} 
+		.linkbotao:hover { 
+		    border-bottom: 1px solid #cccccc; 
+		   border-top: 2px solid #666666; 
+		   border-right: 1px solid #cccccc; 
+		   border-left: 2px solid #666666; 
+		} 
+	</style>
+</head>
+<body>
+	
+	
+	<div class="editor">
+		<form id="graph-editor" action="/action_page.php">		
+	  		<table>
+	  			<tr>
+	  				<td>Time</td>
+	  				<td><input type="text" name="time"></td>
+	  			</tr>
+	  			<tr>
+	  				<td>Data</td>
+	  				<td><input type="date" name="date"></td>
+	  			</tr>
+	  			<tr colspan="2">
+	  				<th>Cultura</th>
+	  			</tr>
+	  			<tr>
+	  				<td>Colaboração e comunicação</td>
+	  				<td><input type="number" name="0" min="1" max="5" value="1"></td>
+	  			</tr>
+	  			<tr>
+	  				<td>Motivação e confiança</td>
+	  				<td><input type="number" name="1" min="1" max="5" value="1"></td>
+	  			</tr>
+	  			<tr>
+	  				<td>Autonomia e auto-organização</td>
+	  				<td><input type="number" name="2" min="1" max="5" value="1"></td>
+	  			</tr>
+	  			<tr>
+	  				<td>Kaizen</td>
+	  				<td><input type="number" name="3" min="1" max="5" value="1"></td>
+	  			</tr>
+	  			<tr>
+	  				<td>Interdisciplinaridade</td>
+	  				<td><input type="number" name="4" min="1" max="5" value="1"></td>
+	  			</tr>
+	  			<tr colspan="2">
+	  				<th>Organizacional</th>
+	  			</tr>
+	  			<tr>
+	  				<td>Práticas Lean-Agile</td>
+	  				<td><input type="number" name="5" min="1" max="5" value="1"></td>
+	  			</tr>
+	  			<tr>
+	  				<td>Métricas e ferramentas</td>
+	  				<td><input type="number" name="6" min="1" max="5" value="1"></td>
+	  			</tr>
+	  			<tr>
+	  				<td>Comprometimento com o produto</td>
+	  				<td><input type="number" name="7" min="1" max="5" value="1"></td>
+	  			</tr>
+	  			<tr>
+	  				<td>Compartilhamento de conhecimento</td>
+	  				<td><input type="number" name="8" min="1" max="5" value="1"></td>
+	  			</tr>
+	  			<tr>
+	  				<td>Ritmo das entregas</td>
+	  				<td><input type="number" name="9" min="1" max="5" value="1"></td>
+	  			</tr>
+	  			<tr colspan="2">
+	  				<th>Técnico</th>
+	  			</tr>
+	  			<tr>
+	  				<td>Código sustentável</td>
+	  				<td><input type="number" name="10" min="1" max="5" value="1"></td>
+	  			</tr>
+	  			<tr>
+	  				<td>Automações (Pipeline)</td>
+	  				<td><input type="number" name="11" min="1" max="5" value="1"></td>
+	  			</tr>
+	  			<tr>
+	  				<td>BDD/TDD e Clean Code</td>
+	  				<td><input type="number" name="12" min="1" max="5" value="1"></td>
+	  			</tr>
+	  			<tr>
+	  				<td>Qualidade E2E</td>
+	  				<td><input type="number" name="13" min="1" max="5" value="1"></td>
+	  			</tr>
+	  			<tr>
+	  				<td>DevOps</td>
+	  				<td><input type="number" name="14" min="1" max="5" value="1"></td>
+	  			</tr>
+	  			<tr colspan="2">
+	  				<th>Negócio</th>
+	  			</tr>
+	  			<tr>
+	  				<td>Quebra de Stories, Features e Epics</td>
+	  				<td><input type="number" name="15" min="1" max="5" value="1"></td>
+	  			</tr>
+	  			<tr>
+	  				<td>UX</td>
+	  				<td><input type="number" name="16" min="1" max="5" value="1"></td>
+	  			</tr>
+	  			<tr>
+	  				<td>Processo de criação</td>
+	  				<td><input type="number" name="17" min="1" max="5" value="1"></td>
+	  			</tr>
+	  			<tr>
+	  				<td>Entrega de valor</td>
+	  				<td><input type="number" name="18" min="1" max="5" value="1"></td>
+	  			</tr>
+	  			<tr>
+	  				<td>Satisfação do cliente</td>
+	  				<td><input type="number" name="19" min="1" max="5" value="1"></td>
+	  			</tr>
+	  		</table>
+		</form>
+	</div>
+	<br>
+	<canvas id="canvas-show" width="800" ></canvas>
+	<canvas id="canvas-out" width="1400" hidden="true"></canvas>
+	<a href="#" id="salvar" class="btn-salvar linkbotao" >Gerar Imagem</a>
+
+	<script>
+		
+		var results = [];
+		var canvasShow = document.querySelector("#canvas-show"); 
+		var canvasOut = document.querySelector("#canvas-out"); 
+		
+		var formEditor = document.querySelector("#graph-editor");
+		// obtém o source da imagem
+		var imgData = canvasOut.toDataURL(); // por padrão, a imagem é PNG
+
+
+		var results = [];
+		function changeResults(){
+			for(var i = 0; i < 20; i++){
+				results[i] = {value:formEditor.querySelector("input[name=\""+i+"\"]").value};
+			}
+		}
+		
+		function draw(canvas){
+
+			var cx    = canvas.getContext("2d");
+
+			var centerX = canvas.width/2;
+			canvas.height = 0.8125 * canvas.width;
+			var centerY = canvas.height/2;
+			var sizeControl = 0.065 * canvas.width;
+			
+			cx.save();
+
+			cx.fillStyle = "white";
+			cx.fillRect(0,0,canvas.width,canvas.height);
+			cx.rect(0,0,canvas.width,canvas.height);
+			cx.stroke();
+			changeResults();
+
+			colors = ["#FE0000","#FE0000","#FFFF00","#00FF01","#00FF01"];
+			var currentAngle = -0.5 * Math.PI;
+			var sliceAngle = 1/20 * 2 * Math.PI;
+			
+			for(var i = 5; i > 0; i--){
+				results.forEach(function(result){
+					color = result.value >= i? colors[i-1]: "white";
+					cx.beginPath();
+				
+					cx.arc(centerX, centerY, sizeControl * i,
+								 currentAngle, currentAngle + sliceAngle);
+					currentAngle += sliceAngle;
+					cx.lineTo(centerX, centerY);
+					cx.fillStyle = color;
+					cx.fill();
+					cx.stroke();
+				});
+			}
+			count = 0;
+			results.forEach(function(result){
+				if(count == 4 || count == 9 || count == 14 || count == 19){
+					var lineWidth = 6;
+				}else{
+					var lineWidth = 1;
+				}
+				count++;
+				cx.beginPath();
+				cx.arc(centerX, centerY, sizeControl * 6,
+							 currentAngle, currentAngle + sliceAngle, true);
+				currentAngle += sliceAngle;
+				cx.lineTo(centerX, centerY);
+				cx.lineWidth=lineWidth;
+				cx.stroke();
+			});
+
+			
+			results.forEach(function(result){
+				
+				cx.beginPath();
+			
+				cx.arc(centerX, centerY, sizeControl * 6,
+							 currentAngle, currentAngle + sliceAngle, true);
+				currentAngle += sliceAngle;
+				cx.lineWidth=10;
+				cx.strokeStyle = "white";
+				cx.stroke();
+			});
+
+			// Textos do gráfico
+			cx.font = (0.03125 * canvas.width) + "px  Arial";
+			cx.fillStyle = "#202C52";
+			cx.fillText("Cultural",canvas.width * 0.00625,canvas.height * 0.038461538461538464);
+			cx.fillText("Organizacional",canvas.width * 0.78125,canvas.height * 0.9769230769230769);
+			cx.fillText("Técnico",canvas.width * 0.00625,canvas.height * 0.9769230769230769);
+			cx.fillText("Negócio",canvas.width * 0.875,canvas.height * 0.038461538461538464);
+			
+			// Cultura 
+			cx.font=(0.01625 * canvas.width) + "px Arial";
+			cx.fillText("Colaboração e",canvas.width * 0.51 ,canvas.height * 0.0269);
+			cx.fillText(" comunicação",canvas.width * 0.51 ,canvas.height * 0.05);
+
+			cx.fillText("Motivação e",canvas.width * 0.64 ,canvas.height * 0.0607);
+			cx.fillText(" confiança",canvas.width * 0.64 ,canvas.height * 0.0847);
+
+			cx.fillText("Autonomia e",canvas.width * 0.75 ,canvas.height * 0.15);
+			cx.fillText("auto-organização",canvas.width * 0.73,canvas.height * 0.17);
+
+			cx.fillText("Kaizen",canvas.width * 0.82 ,canvas.height * 0.284);
+
+			cx.fillText("Interdisciplinaridade",canvas.width * 0.83 ,canvas.height * 0.434);
+			
+			// Organização 
+			cx.fillText("Práticas",canvas.width * 0.87 ,canvas.height * 0.561);
+			cx.fillText("Lean-Agile",canvas.width * 0.858 ,canvas.height * 0.584);
+
+			cx.fillText("Métricas e",canvas.width * 0.84 ,canvas.height * 0.7076923076923077);
+			cx.fillText("ferramentas",canvas.width * 0.838 ,canvas.height * 0.7307692307692307);
+			
+			cx.fillText("Comprometimento",canvas.width * 0.75 ,canvas.height * 0.823076923076923);
+			cx.fillText("com o produto",canvas.width * 0.77 ,canvas.height * 0.8461538461538461);
+
+			cx.fillText("Compartilhamento",canvas.width * 0.63125 ,canvas.height * 0.9076923076923077);
+			cx.fillText("de conhecimento",canvas.width * 0.64325 ,canvas.height * 0.9307692307692308);
+
+			cx.fillText("Ritmo das",canvas.width * 0.5225 ,canvas.height * 0.9461538461538461);
+			cx.fillText("Entregas",canvas.width * 0.530625 ,canvas.height * 0.9692307692307692);
+
+
+			// Técnico 
+			cx.fillText("Código",canvas.width * 0.399375 ,canvas.height * 0.926923076923077);
+			cx.fillText("Sutentável",canvas.width * 0.394375 ,canvas.height * 0.95);
+			cx.fillText("(Refactoring)",canvas.width * 0.388125 ,canvas.height * 0.9730769230769231);
+
+			cx.fillText("Automações",canvas.width * 0.260625 ,canvas.height * 0.9153846153846154);
+			cx.fillText("(Pipeline)",canvas.width * 0.273125 ,canvas.height * 0.9384615384615385);
+			
+			cx.fillText("Práticas BDD/TDD",canvas.width * 0.13125 ,canvas.height * 0.8153846153846154);
+			cx.fillText("e Clean Code",canvas.width * 0.14375 ,canvas.height * 0.8384615384615385);
+			
+			cx.fillText("Qualidade",canvas.width * 0.1 ,canvas.height * 0.6923076923076923);
+			cx.fillText("E2E",canvas.width * 0.11875 ,canvas.height * 0.7153846153846154);
+			
+			cx.fillText("Práticas",canvas.width * 0.08125 ,canvas.height * 0.5461538461538461);
+			cx.fillText("DevOps",canvas.width * 0.08125 ,canvas.height * 0.5692307692307692);
+
+			// Negócio 
+			cx.fillText("Quebra de Stories,",canvas.width * 0.03125 ,canvas.height * 0.43846153846153846);
+			cx.fillText("Features e Epics",canvas.width * 0.0375 ,canvas.height * 0.46153846153846156);
+
+			cx.fillText("User",canvas.width * 0.1 ,canvas.height * 0.2846153846153846);
+			cx.fillText("Experience",canvas.width * 0.08125 ,canvas.height * 0.3076923076923077);
+			
+			cx.fillText("Processo de",canvas.width * 0.14375 ,canvas.height * 0.16923076923076924);
+			cx.fillText("Criação",canvas.width * 0.159375 ,canvas.height * 0.19230769230769232);
+			
+			cx.fillText("Entrega de",canvas.width * 0.26875 ,canvas.height * 0.08076923076923077);
+			cx.fillText("valor",canvas.width * 0.29375 ,canvas.height * 0.10384615384615385);
+			
+			cx.fillText("Satisfação",canvas.width * 0.39125 ,canvas.height * 0.026923076923076925);
+			cx.fillText("do cliente",canvas.width * 0.394375 ,canvas.height * 0.05);
+
+
+			// Informações do time e data
+			cx.font=(0.0125 * canvas.width) + "px Arial";
+			cx.fillText("Time: "+formEditor.querySelector("input[name=time]").value,canvas.width * 0.0125 ,canvas.height * 0.09230769230769231);
+			cx.fillText("Data: "+formEditor.querySelector("input[name=date]").value,canvas.width * 0.0125 ,canvas.height * 0.11538461538461539);
+
+			imgData = canvas.toDataURL();
+			cx.restore();
+		}
+
+		formEditor.addEventListener("change", function(){
+			draw(canvasShow);
+		});
+		// salva imagem
+		document.getElementById('salvar').addEventListener('click', function(e){
+		    draw(canvasOut);
+		    this.href = imgData; // source
+		    this.download = 'Roda-Agil.png'; // nome da imagem
+		    return false;
+		});
+		
+		draw(canvasShow);
+	</script>
+	
+</body>
+</html>
