@@ -1,5 +1,4 @@
-# Espiral-model-of-evaluation-in-the-scrum
+# Roda Ágil 
 
-Welcome to the Espiral-model-of-evaluation-in-the-scrum wiki!
+Está é uma simples aplicação para gerar a imagem preenchida da Roda Ágil utilizada para avaliar  maturidade dos times.
 
-This application propose a facility method of spiral model filling for scrum evaluate. For using, you need insert the values in dedicate fields and press button of image save, easy and simple!
