@@ -1,3 +1,9 @@
+/**
+ * @author Érick Luiz Fonseca Lopes 
+ * @license MIT 
+ * @description Lib para criação de gráfico polar 
+ */
+
 let Graph = (function(){
 
     let _config = {
